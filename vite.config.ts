@@ -7,5 +7,8 @@ export default defineConfig({
     build: {
         outDir: 'dist',
     },
-    publicDir: 'public' // copie tout public/ dans dist/
+    publicDir: 'public', // copie tout public/ dans dist/,
+    define: {
+        'process.env': {}
+    }
 })
