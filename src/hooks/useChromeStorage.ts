@@ -4,14 +4,17 @@ export function useChromeStorage<T>(key: string, defaultValue: T) {
     const [value, setValue] = useState<T>(defaultValue);
 
     useEffect(() => {
-        if (typeof chrome !== "undefined" && chrome.storage) {
-            chrome.storage.local.get([key], (result) => {
-                const storedValue = result[key] as T | undefined;
-                if (storedValue !== undefined) {
-                    setValue(storedValue); // ok, écrase le defaultValue uniquement si présent
-                }
-            });
+        if (typeof chrome == "undefined" && !chrome.storage) {
+            return;
         }
+
+        chrome.storage.local.get([key], (result) => {
+            const storedValue = result[key] as T | undefined;
+            if (storedValue == undefined) {
+                return;
+            }
+            setValue(storedValue);
+        });
     }, [key]);
 
     const updateValue = (newValue: T) => {
