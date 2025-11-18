@@ -13,14 +13,33 @@ const defaultData: StorageData = {
 type DisplayModeProps = {
     isEditMode: boolean,
     data: StorageData,
-    switchMode: () => void
-    createList: (list: List) => void
+    switchMode: () => void,
+    createList: (list: List) => void,
+    editList: (list: List) => void,
+    deleteList: (listId: number) => void,
+    existantList: List[],
 }
 
-function DisplayMode({isEditMode, data, switchMode, createList}: DisplayModeProps) {
-    if (isEditMode) {
-        return <ListAddEdit addList={createList}/>;
+function DisplayMode({isEditMode, data, switchMode, createList, editList, deleteList, existantList}: DisplayModeProps) {
+
+
+    const [selectedList, setSelectedList] = useState<List| null>(null);
+
+
+    const selectList = (list: List) => {
+        setSelectedList(list)
+        switchMode();
     }
+
+    const goToCreateMode = () => {
+        setSelectedList(null)
+        switchMode();
+    }
+
+    if (isEditMode) {
+        return <ListAddEdit addList={createList} editList={editList} deleteList={deleteList} list={selectedList} existantList={existantList}/>;
+    }
+
     return <>
         <header>
             <h1>Pull Request Auto Assigner</h1>
@@ -28,12 +47,12 @@ function DisplayMode({isEditMode, data, switchMode, createList}: DisplayModeProp
 
         <main>
             {data.lists.map((list, i) => (
-                <ListCard key={i} name={list.name} people={list.people}/>
+                <ListCard key={i} list={list} selectList={selectList}/>
             ))}
         </main>
 
         <footer>
-            <button onClick={switchMode}>Créer une liste</button>
+            <button onClick={goToCreateMode}>Créer une liste</button>
         </footer>
     </>;
 }
@@ -51,9 +70,22 @@ function App() {
         switchMode();
     };
 
+    const editList = (editList: List) => {
+        const newLists: List[] = data.lists.filter((l: List) => l.id !== editList.id);
+        setData({lists: [...newLists, editList]});
+        switchMode();
+    };
+
+    const deleteList = (listId: number) => {
+        const newLists: List[] = data.lists.filter((list: List) => list.id !== listId);
+        setData({lists: newLists});
+        switchMode();
+    };
+
 
     return (
-        <DisplayMode isEditMode={isEditMode} data={data} switchMode={switchMode} createList={createList}/>
+        <DisplayMode isEditMode={isEditMode} data={data} switchMode={switchMode} createList={createList} editList={editList}
+                     deleteList={deleteList} existantList={data.lists}/>
     );
 }
 

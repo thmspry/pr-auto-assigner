@@ -21,6 +21,8 @@ header, footer {
 main {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(5, 1fr);
+    grid-template-rows: auto;
     gap: 8px;
+    height: 242px;
+    overflow-y: auto;
 }
