@@ -2,24 +2,24 @@ import './App.css'
 import {useChromeStorage} from "./hooks/useChromeStorage.ts";
 import type {StorageData} from "./types/storage-data.ts";
 import type {List} from "./types/list.ts";
-import {ListCard} from "./component/ListCard.tsx";
+import {ListCard} from "./component/ListCard/ListCard.tsx";
 import {useState} from "react";
+import ListAddEdit from "./component/ListAddEdit/ListAddEdit.tsx";
 
 const defaultData: StorageData = {
-    lists: [{
-        name: "aaa", people: ['lala', 'lolo']
-    }]
+    lists: []
 };
 
 type DisplayModeProps = {
     isEditMode: boolean,
     data: StorageData,
-    addList: () => void
+    switchMode: () => void
+    createList: (list: List) => void
 }
 
-function DisplayMode({isEditMode, data, addList}: DisplayModeProps) {
+function DisplayMode({isEditMode, data, switchMode, createList}: DisplayModeProps) {
     if (isEditMode) {
-        return <p>Salut</p>;
+        return <ListAddEdit addList={createList}/>;
     }
     return <>
         <header>
@@ -33,7 +33,7 @@ function DisplayMode({isEditMode, data, addList}: DisplayModeProps) {
         </main>
 
         <footer>
-            <button onClick={addList}>Ajouter une liste</button>
+            <button onClick={switchMode}>Créer une liste</button>
         </footer>
     </>;
 }
@@ -42,16 +42,18 @@ function App() {
     const [data, setData] = useChromeStorage<StorageData>("personLists", defaultData);
     const [isEditMode, setIsEditMode] = useState<boolean>(false);
 
-    const addList = () => {
-        setIsEditMode(true);
-        const newList: List = {name: "Nouvelle liste", people: []};
-        setData({lists: [...data.lists, newList]});
+    const switchMode = () => {
+        setIsEditMode(!isEditMode);
     };
 
+    const createList = (list: List) => {
+        setData({lists: [...data.lists, list]});
+        switchMode();
+    };
+
+
     return (
-        <>
-            <DisplayMode isEditMode={isEditMode} data={data} addList={addList}/>
-        </>
+        <DisplayMode isEditMode={isEditMode} data={data} switchMode={switchMode} createList={createList}/>
     );
 }
 

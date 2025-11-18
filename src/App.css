@@ -13,6 +13,11 @@ header, main, footer {
     width: 100%;
 }
 
+header, footer {
+    display: flex;
+    justify-content: center;
+}
+
 main {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
