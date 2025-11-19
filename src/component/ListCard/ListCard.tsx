@@ -15,9 +15,8 @@ export const ListCard: React.FC<ListCardProps> = ({ list, selectList }: ListCard
 
     return (
         <div className={'card'}>
-            <h3>{list.id}</h3>
             <h3>{list.name}</h3>
-            <button onClick={onSelectList}>✏️</button>
+            <button className={'editBtn'} onClick={onSelectList}>✏️</button>
         </div>
     );
 };

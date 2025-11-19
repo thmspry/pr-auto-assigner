@@ -1,0 +1,40 @@
+.add-edit {
+    display: flex;
+    flex-flow: column;
+
+    header {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .back-btn {
+            position: absolute;
+            left: 0;
+            top: 50%;
+
+            translate: 0 -50%;
+        }
+    }
+
+    main {
+        display: flex;
+        flex-flow: column;
+    }
+
+    footer {
+        display: flex;
+
+        .main-action {
+            width: 100%;
+        }
+    }
+}
+
+header, main, footer {
+    width: 100%;
+}
+
+
+@media (prefers-color-scheme: light) {
+}

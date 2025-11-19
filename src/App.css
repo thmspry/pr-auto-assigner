@@ -1,5 +1,6 @@
 #root {
     max-width: 1280px;
+    height: 100%;
     width: 100%;
     display: flex;
     flex-flow: column;
@@ -19,10 +20,13 @@ header, footer {
 }
 
 main {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: auto;
-    gap: 8px;
     height: 242px;
     overflow-y: auto;
+
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: auto;
+        gap: 8px;
+    }
 }

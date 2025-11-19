@@ -37,7 +37,7 @@ function DisplayMode({isEditMode, data, switchMode, createList, editList, delete
     }
 
     if (isEditMode) {
-        return <ListAddEdit addList={createList} editList={editList} deleteList={deleteList} list={selectedList} existantList={existantList}/>;
+        return <ListAddEdit addList={createList} editList={editList} deleteList={deleteList} list={selectedList} existantList={existantList} switchMode={switchMode}/>;
     }
 
     return <>
@@ -46,9 +46,12 @@ function DisplayMode({isEditMode, data, switchMode, createList, editList, delete
         </header>
 
         <main>
-            {data.lists.map((list, i) => (
-                <ListCard key={i} list={list} selectList={selectList}/>
-            ))}
+            <div className="grid">
+                {data.lists.map((list, i) => (
+                    <ListCard key={i} list={list} selectList={selectList}/>
+                ))}
+            </div>
+
         </main>
 
         <footer>

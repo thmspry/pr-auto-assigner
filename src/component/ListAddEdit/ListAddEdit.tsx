@@ -1,3 +1,4 @@
+import './ListAddEdit.css'
 import type {List} from "../../types/list.ts";
 import {useState} from "react";
 
@@ -6,16 +7,25 @@ type ListAddEditProps = {
     editList: (list: List) => void,
     deleteList: (listId: number) => void,
     existantList: List[],
-    list?: List | null
+    list?: List | null,
+    switchMode: () => void,
 };
 
-const ListAddEdit = ({addList, editList, deleteList, list, existantList}: ListAddEditProps) => {
+const ListAddEdit = ({addList, editList, deleteList, list, existantList, switchMode}: ListAddEditProps) => {
 
-    const [listName, setListName] = useState<string>(list?.name ?? '')
+    const [listName, setListName] = useState<string>(list?.name ?? '');
+    const [people, setPeople] = useState<string>(list?.people.join(',') ?? '');
 
     const listNameAlreadyExist = (): boolean => {
+        if(listName === list?.name) {
+            return false;
+        }
         const listNames = existantList.map((l: List) => l.name);
         return listNames.includes(listName);
+    }
+
+    const actionIsDisabled = () => {
+        return listNameAlreadyExist();
     }
 
     function getNextListId(): number {
@@ -25,21 +35,21 @@ const ListAddEdit = ({addList, editList, deleteList, list, existantList}: ListAd
     }
 
     const createList = () => {
-        if (listNameAlreadyExist()) {
+        if (actionIsDisabled()) {
             return;
         }
 
         const nextId = getNextListId();
 
-        const newList: List = {id: nextId, name: listName, people: []};
+        const newList: List = {id: nextId, name: listName, people: people.split(',')};
         addList(newList);
     }
     const onEditList = () => {
-        if (listNameAlreadyExist() || !list) {
+        if (actionIsDisabled() || !list) {
             return;
         }
 
-        const newList: List = {id: list?.id, name: listName, people: []};
+        const newList: List = {id: list?.id, name: listName, people: people.split(',')};
         editList(newList);
     }
 
@@ -51,28 +61,43 @@ const ListAddEdit = ({addList, editList, deleteList, list, existantList}: ListAd
     }
 
     return (
-        <>
-            <h3>Créer une liste</h3>
-            <label htmlFor={'name'}>Nom</label>
-            <input id={'name'} type={'text'} autoComplete={'off'} value={listName}
-                   onChange={
-                       (event) => setListName(event.target.value)
-                   }
-            />
-            {
-                listNameAlreadyExist() ? <p>Ce nom de liste existe déjà</p> : ''
-            }
+        <div className="add-edit">
+            <header>
+                <button className="back-btn" onClick={switchMode}>◀️</button>
+                <h3>Créer une liste</h3>
+            </header>
 
+            <main>
+                <label htmlFor={'name'}>Nom</label>
+                <input id={'name'} type={'text'} autoComplete={'off'} value={listName}
+                       onChange={
+                           (event) => setListName(event.target.value)
+                       }
+                />
+                {
+                    listNameAlreadyExist() ? <p>Ce nom de liste existe déjà</p> : ''
+                }
 
-            {
-                list ? <>
-                    <button onClick={onEditList} disabled={listNameAlreadyExist()}>Modifier la liste</button>
-                    <button onClick={deleteHehe}>🗑️</button>
-                </> : <>
-                    <button onClick={createList} disabled={listNameAlreadyExist()}>Créer la liste</button>
-                </>
-            }
-        </>
+                <label htmlFor={'people'}>Personnes</label>
+                <input id={'people'} type={'text'} autoComplete={'off'} value={people}
+                       onChange={
+                           (event) => setPeople(event.target.value)
+                       }
+                />
+            </main>
+
+            <footer>
+                {
+                    list ? <>
+                        <button onClick={deleteHehe}>🗑️</button>
+                        <button className="main-action" onClick={onEditList} disabled={actionIsDisabled()}>Modifier la liste</button>
+                    </> : <>
+                        <button className="main-action" onClick={createList} disabled={actionIsDisabled()}>Créer la liste</button>
+                    </>
+                }
+            </footer>
+
+        </div>
     );
 };
 
