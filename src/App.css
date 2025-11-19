@@ -4,10 +4,15 @@
     width: 100%;
     display: flex;
     flex-flow: column;
+    gap: 8px;
 }
 
 h1 {
     font-size: 14px;
+}
+
+header {
+    box-shadow: 0 10px 15px 3px rgba(209, 209, 209, 0.17);
 }
 
 header, main, footer {
@@ -17,16 +22,25 @@ header, main, footer {
 header, footer {
     display: flex;
     justify-content: center;
+    align-content: center;
+    height: 50px;
 }
 
 main {
     height: 242px;
     overflow-y: auto;
 
-    .grid {
-        display: grid;
+    .lists {
+        display: flex;
+        flex-flow: column;
         grid-template-columns: repeat(2, 1fr);
         grid-template-rows: auto;
         gap: 8px;
     }
+}
+
+footer {
+    display: flex;
+    gap: 4px;
+    padding-bottom: 4px;
 }

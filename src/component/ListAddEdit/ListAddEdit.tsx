@@ -1,6 +1,7 @@
 import './ListAddEdit.css'
 import type {List} from "../../types/list.ts";
 import {useState} from "react";
+import {ArrowBigLeft, Trash2} from "lucide-react";
 
 type ListAddEditProps = {
     addList: (list: List) => void,
@@ -14,10 +15,11 @@ type ListAddEditProps = {
 const ListAddEdit = ({addList, editList, deleteList, list, existantList, switchMode}: ListAddEditProps) => {
 
     const [listName, setListName] = useState<string>(list?.name ?? '');
-    const [people, setPeople] = useState<string>(list?.people.join(',') ?? '');
+    const [people, setPeople] = useState<string[]>(list?.people ?? [])
+    const [peopleInput, setPeopleInput] = useState<string>('');
 
     const listNameAlreadyExist = (): boolean => {
-        if(listName === list?.name) {
+        if (listName === list?.name) {
             return false;
         }
         const listNames = existantList.map((l: List) => l.name);
@@ -41,7 +43,7 @@ const ListAddEdit = ({addList, editList, deleteList, list, existantList, switchM
 
         const nextId = getNextListId();
 
-        const newList: List = {id: nextId, name: listName, people: people.split(',')};
+        const newList: List = {id: nextId, name: listName, people: people};
         addList(newList);
     }
     const onEditList = () => {
@@ -49,50 +51,95 @@ const ListAddEdit = ({addList, editList, deleteList, list, existantList, switchM
             return;
         }
 
-        const newList: List = {id: list?.id, name: listName, people: people.split(',')};
+        const newList: List = {id: list?.id, name: listName, people: people};
         editList(newList);
     }
 
     const deleteHehe = () => {
-        if(!list) {
+        if (!list) {
             return;
         }
         deleteList(list?.id);
     }
 
+    const addPerson = () => {
+        setPeople([...people, peopleInput]);
+    }
+
+    const deletePerson = (person: string) => {
+        const withoutPerson = people.filter((p) => p !== person);
+        setPeople(withoutPerson);
+    }
+
+    const handleEnter = () => {
+        if(people.includes(peopleInput)) {
+            return;
+        }
+        addPerson();
+        setPeopleInput('');
+    };
+
+
     return (
         <div className="add-edit">
             <header>
-                <button className="back-btn" onClick={switchMode}>◀️</button>
+                <button className="back-btn" onClick={switchMode}><ArrowBigLeft/></button>
                 <h3>Créer une liste</h3>
             </header>
 
             <main>
-                <label htmlFor={'name'}>Nom</label>
-                <input id={'name'} type={'text'} autoComplete={'off'} value={listName}
-                       onChange={
-                           (event) => setListName(event.target.value)
-                       }
-                />
-                {
-                    listNameAlreadyExist() ? <p>Ce nom de liste existe déjà</p> : ''
-                }
+                <div className="field">
+                    <label htmlFor={'name'}>Nom</label>
+                    <input id={'name'} type={'text'} autoComplete={'off'} value={listName}
+                           onChange={
+                               (event) => setListName(event.target.value)
+                           }
+                    />
+                    {
+                        listNameAlreadyExist() ? <p>Ce nom de liste existe déjà</p> : ''
+                    }
+                </div>
 
-                <label htmlFor={'people'}>Personnes</label>
-                <input id={'people'} type={'text'} autoComplete={'off'} value={people}
-                       onChange={
-                           (event) => setPeople(event.target.value)
-                       }
-                />
+                <div className="field">
+                    <label htmlFor={'people'}>Personnes</label>
+                    <div className="people-list">
+                        {people.map((p) => {
+                            return <div className="person">
+                                <span>{p}</span>
+                                <button onClick={() => deletePerson(p)}><Trash2 size={14} color="#de2b94"/></button>
+                            </div>;
+                        })}
+                        <div className="input-person">
+                            <input id={'people'} type={'text'} autoComplete={'off'}
+                                   value={peopleInput}
+                                   onChange={
+                                       (event) => setPeopleInput(event.target.value)
+                                   }
+                                   onKeyDown={(event) => {
+                                       if (event.key === 'Enter') {
+                                           handleEnter(); // 👉 Ta fonction à appeler
+                                       }
+                                   }}
+                            />
+                            <button onClick={addPerson}>+</button>
+                        </div>
+                    </div>
+                </div>
+
+
             </main>
 
             <footer>
                 {
                     list ? <>
-                        <button onClick={deleteHehe}>🗑️</button>
-                        <button className="main-action" onClick={onEditList} disabled={actionIsDisabled()}>Modifier la liste</button>
+                        <button className="delete" onClick={deleteHehe}><Trash2 onClick={deleteHehe}/></button>
+                        <button className="main-action" onClick={onEditList} disabled={actionIsDisabled()}>Modifier la
+                            liste
+                        </button>
                     </> : <>
-                        <button className="main-action" onClick={createList} disabled={actionIsDisabled()}>Créer la liste</button>
+                        <button className="main-action" onClick={createList} disabled={actionIsDisabled()}>Créer la
+                            liste
+                        </button>
                     </>
                 }
             </footer>

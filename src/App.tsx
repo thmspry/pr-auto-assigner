@@ -46,7 +46,7 @@ function DisplayMode({isEditMode, data, switchMode, createList, editList, delete
         </header>
 
         <main>
-            <div className="grid">
+            <div className="lists">
                 {data.lists.map((list, i) => (
                     <ListCard key={i} list={list} selectList={selectList}/>
                 ))}

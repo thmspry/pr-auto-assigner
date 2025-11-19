@@ -1,6 +1,7 @@
 .add-edit {
     display: flex;
     flex-flow: column;
+    gap: 8px;
 
     header {
         position: relative;
@@ -20,11 +21,59 @@
     main {
         display: flex;
         flex-flow: column;
+        gap: 16px;
+
+        .field {
+            display: flex;
+            gap: 4px;
+            flex-flow: column;
+        }
+
+        .people-list {
+            display: flex;
+            flex-flow: column;
+
+            .person {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+
+                &:not(:last-child) {
+                    border-bottom: 1px gray solid;
+                }
+
+                &:hover{
+                    button {
+                        opacity: 1;
+                    }
+                }
+
+                span {
+                    margin-left: 4px;
+                    height: fit-content;
+                }
+
+                button {
+                    opacity: 0;
+                    background: none;
+                    transition: 300ms;
+                }
+            }
+
+
+
+            .input-person {
+                display: flex;
+                gap: 4px;
+
+                input {
+                    width: 100%;
+                }
+            }
+        }
     }
 
     footer {
-        display: flex;
-
         .main-action {
             width: 100%;
         }
