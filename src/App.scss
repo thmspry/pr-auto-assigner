@@ -1,0 +1,61 @@
+@use 'colors';
+
+#root {
+  max-width: 1280px;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-flow: column;
+  gap: 8px;
+}
+
+h1 {
+  font-size: 14px;
+  line-height: 14px;
+  margin: 0;
+  height: fit-content;
+}
+
+header {
+  background: linear-gradient(180deg, colors.$dark-2 70%, colors.$dark-1);
+  box-shadow: 0 2px 2px colors.$dark-1, 0 4px 4px colors.$dark-2;
+}
+
+header, main, footer {
+  width: 100%;
+}
+
+header, footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+}
+
+main {
+  height: 242px;
+  overflow-y: auto;
+
+  .lists {
+    display: flex;
+    flex-flow: column;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto;
+    gap: 8px;
+    padding: 8px;
+  }
+}
+
+footer {
+  display: flex;
+  gap: 4px;
+  padding-bottom: 4px;
+}
+
+@media (prefers-color-scheme: light) {
+  header {
+    background: colors.$light-2;
+    box-shadow: none;
+    border-bottom: 1px solid colors.$light-3;
+  }
+}

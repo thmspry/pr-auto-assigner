@@ -1,0 +1,52 @@
+@use '../../colors';
+
+.card {
+  display: flex;
+  gap: 4px;
+  background: linear-gradient(0deg, colors.$dark-2 70%, colors.$dark-1);
+  border-radius: 4px;
+  height: 50px;
+  position: relative;
+  padding: 8px;
+  transition: 500ms;
+
+  &:hover {
+    background: linear-gradient(0deg, colors.$dark-2, hsl(134 69.9% 13.3%));
+
+    .edit {
+      opacity: 1;
+    }
+  }
+
+  .content {
+    width: 100%;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  .edit {
+    background: colors.$dark-1;
+    opacity: 0;
+  }
+}
+
+
+@media (prefers-color-scheme: light) {
+  .card {
+    background: linear-gradient(0deg, colors.$light-2 70%, colors.$light-1);
+    box-shadow: 0 2px 2px hsla(0, 0%, 0%, 0.07), 0 4px 4px hsla(0, 0%, 0%, 0.15);
+
+    &:hover {
+      background: linear-gradient(0deg, colors.$light-2, hsl(134 69.9% 87.7%));
+    }
+
+    .edit {
+      position: absolute;
+      top: 0;
+      right: 0;
+      background: colors.$light-1;
+    }
+  }
+}

@@ -1,4 +1,4 @@
-import './App.css'
+import './App.scss'
 import {useChromeStorage} from "./hooks/useChromeStorage.ts";
 import type {StorageData} from "./types/storage-data.ts";
 import type {List} from "./types/list.ts";
