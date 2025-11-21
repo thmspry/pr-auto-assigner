@@ -44,6 +44,20 @@ button.delete {
   color: colors.$dark-font-1;
 }
 
+input {
+  background: transparent;
+  outline: none;
+  border: colors.$border 2px solid;
+  border-radius: 8px;
+  transition: 200ms;
+  padding: 8px 16px;
+
+  &:active, &:focus {
+    border-color: rgb(33, 186, 69);
+    background: linear-gradient(0deg, transparent, hsl(134 69.9% 13.3%));
+  }
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: colors.$light-font-1;

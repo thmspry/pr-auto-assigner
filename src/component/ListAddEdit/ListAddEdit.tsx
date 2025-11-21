@@ -1,4 +1,4 @@
-import './ListAddEdit.css'
+import './ListAddEdit.scss'
 import type {List} from "../../types/list.ts";
 import {useState} from "react";
 import {ArrowBigLeft, Trash2} from "lucide-react";
@@ -63,7 +63,12 @@ const ListAddEdit = ({addList, editList, deleteList, list, existantList, switchM
     }
 
     const addPerson = () => {
-        setPeople([...people, peopleInput]);
+        const actualInput = peopleInput.trim();
+        if(people.includes(actualInput) || actualInput === '') {
+            return;
+        }
+        setPeople([...people, actualInput]);
+        setPeopleInput('');
     }
 
     const deletePerson = (person: string) => {
@@ -71,14 +76,14 @@ const ListAddEdit = ({addList, editList, deleteList, list, existantList, switchM
         setPeople(withoutPerson);
     }
 
-    const handleEnter = () => {
-        if(people.includes(peopleInput)) {
-            return;
+    const correspondToInput = (person: string): string => {
+        const actualInput = peopleInput.trim();
+        if(person === actualInput) {
+            return 'correspond-to-input';
         }
-        addPerson();
-        setPeopleInput('');
-    };
 
+        return '';
+    }
 
     return (
         <div className="add-edit">
@@ -104,9 +109,11 @@ const ListAddEdit = ({addList, editList, deleteList, list, existantList, switchM
                     <label htmlFor={'people'}>Personnes</label>
                     <div className="people-list">
                         {people.map((p) => {
-                            return <div className="person">
+                            return <div className={`person ${correspondToInput(p)}`} onClick={() => deletePerson(p)}>
                                 <span>{p}</span>
-                                <button onClick={() => deletePerson(p)}><Trash2 size={14} color="#de2b94"/></button>
+                                <div className="delete-layer">
+                                    <Trash2 className="delete-icon" size={14} color="#cb6465"/>
+                                </div>
                             </div>;
                         })}
                         <div className="input-person">
@@ -117,7 +124,7 @@ const ListAddEdit = ({addList, editList, deleteList, list, existantList, switchM
                                    }
                                    onKeyDown={(event) => {
                                        if (event.key === 'Enter') {
-                                           handleEnter(); // 👉 Ta fonction à appeler
+                                           addPerson();
                                        }
                                    }}
                             />
