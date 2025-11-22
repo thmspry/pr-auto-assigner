@@ -43,6 +43,7 @@ function DisplayMode({isEditMode, data, switchMode, createList, editList, delete
     return <>
         <header>
             <h1>Pull Request Auto Assigner</h1>
+            <i></i>
         </header>
 
         <main>

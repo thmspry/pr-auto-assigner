@@ -27,7 +27,7 @@
   }
 
   .edit {
-    background: colors.$dark-1;
+    background: transparent;
     opacity: 0;
   }
 }
@@ -40,13 +40,6 @@
 
     &:hover {
       background: linear-gradient(0deg, colors.$light-2, hsl(134 69.9% 87.7%));
-    }
-
-    .edit {
-      position: absolute;
-      top: 0;
-      right: 0;
-      background: colors.$light-1;
     }
   }
 }
