@@ -2,6 +2,7 @@ import './ListAddEdit.scss'
 import type {List} from "../../types/list.ts";
 import {useState} from "react";
 import {ArrowBigLeft, Trash2} from "lucide-react";
+import Person from "./Person/Person.tsx";
 
 type ListAddEditProps = {
     addList: (list: List) => void,
@@ -64,7 +65,7 @@ const ListAddEdit = ({addList, editList, deleteList, list, existantList, switchM
 
     const addPerson = () => {
         const actualInput = peopleInput.trim();
-        if(people.includes(actualInput) || actualInput === '') {
+        if (people.includes(actualInput) || actualInput === '') {
             return;
         }
         setPeople([...people, actualInput]);
@@ -76,13 +77,9 @@ const ListAddEdit = ({addList, editList, deleteList, list, existantList, switchM
         setPeople(withoutPerson);
     }
 
-    const correspondToInput = (person: string): string => {
+    const correspondToInput = (person: string): boolean => {
         const actualInput = peopleInput.trim();
-        if(person === actualInput) {
-            return 'correspond-to-input';
-        }
-
-        return '';
+        return person === actualInput;
     }
 
     return (
@@ -108,14 +105,10 @@ const ListAddEdit = ({addList, editList, deleteList, list, existantList, switchM
                 <div className="field">
                     <label htmlFor={'people'}>Personnes</label>
                     <div className="people-list">
-                        {people.map((p) => {
-                            return <div className={`person ${correspondToInput(p)}`} onClick={() => deletePerson(p)}>
-                                <span>{p}</span>
-                                <div className="delete-layer">
-                                    <Trash2 className="delete-icon" size={14} color="#cb6465"/>
-                                </div>
-                            </div>;
-                        })}
+                        {people.map((p) =>
+                            <Person person={p} correspondToInput={correspondToInput(p)}
+                                    onClick={() => deletePerson(p)}/>
+                        )}
                         <div className="input-person">
                             <input id={'people'} type={'text'} autoComplete={'off'}
                                    value={peopleInput}
@@ -139,15 +132,15 @@ const ListAddEdit = ({addList, editList, deleteList, list, existantList, switchM
             <footer>
                 {
                     list ? <>
-                        <button className="delete" onClick={deleteHehe}><Trash2 onClick={deleteHehe}/></button>
-                        <button className="main-action" onClick={onEditList} disabled={actionIsDisabled()}>Modifier la
-                            liste
+                            <button className="delete" onClick={deleteHehe}><Trash2 onClick={deleteHehe}/></button>
+                            <button className="main-action" onClick={onEditList} disabled={actionIsDisabled()}>
+                                Modifier la liste
+                            </button>
+                        </> :
+                        <button className="main-action" onClick={createList} disabled={actionIsDisabled()}>
+                            Créer la liste
                         </button>
-                    </> : <>
-                        <button className="main-action" onClick={createList} disabled={actionIsDisabled()}>Créer la
-                            liste
-                        </button>
-                    </>
+
                 }
             </footer>
 

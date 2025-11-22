@@ -1,6 +1,6 @@
 import './ListCard.scss'
 import React from "react";
-import type {List} from "../../types/list.ts";
+import type {List} from "../../../types/list.ts";
 import {PenLine} from "lucide-react";
 
 type ListCardProps = {

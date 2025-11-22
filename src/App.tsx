@@ -2,9 +2,9 @@ import './App.scss'
 import {useChromeStorage} from "./hooks/useChromeStorage.ts";
 import type {StorageData} from "./types/storage-data.ts";
 import type {List} from "./types/list.ts";
-import {ListCard} from "./component/ListCard/ListCard.tsx";
 import {useState} from "react";
 import ListAddEdit from "./component/ListAddEdit/ListAddEdit.tsx";
+import Home from "./component/Home/Home.tsx";
 
 const defaultData: StorageData = {
     lists: []
@@ -26,7 +26,7 @@ function DisplayMode({isEditMode, data, switchMode, createList, editList, delete
     const [selectedList, setSelectedList] = useState<List| null>(null);
 
 
-    const selectList = (list: List) => {
+    const goToEditMode = (list: List) => {
         setSelectedList(list)
         switchMode();
     }
@@ -40,25 +40,7 @@ function DisplayMode({isEditMode, data, switchMode, createList, editList, delete
         return <ListAddEdit addList={createList} editList={editList} deleteList={deleteList} list={selectedList} existantList={existantList} switchMode={switchMode}/>;
     }
 
-    return <>
-        <header>
-            <h1>Pull Request Auto Assigner</h1>
-            <i></i>
-        </header>
-
-        <main>
-            <div className="lists">
-                {data.lists.map((list, i) => (
-                    <ListCard key={i} list={list} selectList={selectList}/>
-                ))}
-            </div>
-
-        </main>
-
-        <footer>
-            <button onClick={goToCreateMode}>Créer une liste</button>
-        </footer>
-    </>;
+    return <Home goToCreateMode={goToCreateMode} goToEditMode={goToEditMode} data={data}/>;
 }
 
 function App() {
