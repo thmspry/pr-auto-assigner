@@ -1,7 +1,7 @@
 import './ListAddEdit.scss'
 import type {List} from "../../types/list.ts";
 import {useState} from "react";
-import {ArrowBigLeft, Trash2} from "lucide-react";
+import {ArrowBigLeft, Plus, Trash2} from "lucide-react";
 import Person from "./Person/Person.tsx";
 
 type ListAddEditProps = {
@@ -85,7 +85,7 @@ const ListAddEdit = ({addList, editList, deleteList, list, existantList, switchM
     return (
         <div className="add-edit">
             <header>
-                <button className="back-btn" onClick={switchMode}><ArrowBigLeft/></button>
+                <button className="back-btn secondary" onClick={switchMode}><ArrowBigLeft/></button>
                 <h3>Créer une liste</h3>
             </header>
 
@@ -121,7 +121,7 @@ const ListAddEdit = ({addList, editList, deleteList, list, existantList, switchM
                                        }
                                    }}
                             />
-                            <button onClick={addPerson}>+</button>
+                            <button onClick={addPerson}><Plus size={14}/></button>
                         </div>
                     </div>
                 </div>

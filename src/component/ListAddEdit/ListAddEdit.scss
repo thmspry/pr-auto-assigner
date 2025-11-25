@@ -25,13 +25,15 @@
     display: flex;
     flex-flow: column;
     gap: 16px;
+    background: colors.$dark-2;
+    height: 100%;
+    padding: 8px;
+    border-radius: 8px;
 
     .field {
       display: flex;
       gap: 4px;
       flex-flow: column;
-      background: colors.$dark-2;
-      padding: 4px 16px;
 
       label {
         font-size: 14px;

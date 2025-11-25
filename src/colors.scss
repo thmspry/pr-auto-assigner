@@ -1,8 +1,8 @@
 // Dark Mode
 $dark-highlight: hsl(120 2.7% 60%);
-$dark-1: hsl(120 2.7% 10%);
-$dark-2: hsl(120 2.7% 5%);
-$dark-3: hsl(120 2.7% 0%);
+$dark-1: #263140;
+$dark-2: #1d2530;
+$dark-3: hsl(215.29deg 27.87% 11.96%);
 
 $dark-font-1: hsl(120 2.7% 95%);
 $dark-font-2: hsl(120 2.7% 70%);
@@ -23,3 +23,6 @@ $danger: #cb6465;
 $warning: #cbcb64;
 $success: #65cc64;
 $info: #8c8cd9;
+
+$vibrant: rgb(33, 186, 69);
+$vibrant-darker: hsl(134 69.9% 33.6%);

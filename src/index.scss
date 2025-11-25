@@ -13,7 +13,6 @@
 body {
   margin: 0;
   display: flex;
-  place-items: center;
   min-width: 320px;
   min-height: 100vh;
 }
@@ -23,18 +22,30 @@ button {
   padding: 12px 16px;
   font-weight: 500;
   font-family: inherit;
-  background-color: transparent;
   cursor: pointer;
   transition: 300ms;
-  color: rgb(33, 186, 69);
+  color: white;
   outline: none;
-  border: rgb(33, 186, 69) 2px solid;
+  background: colors.$vibrant;
   height: fit-content;
   line-height: 14px;
-  font-size: 14px;
+  align-items: center;
+  display: flex;
+  border: none;
+  font-size: 12px;
+  gap: 8px;
+  justify-content: center;
+
+  &.secondary {
+    background: transparent;
+
+    &:hover {
+      background-color: colors.$vibrant;
+    }
+  }
 
   &:hover {
-    background-color: hsl(134 69.9% 13.3%);
+    background-color: colors.$vibrant-darker;
   }
 }
 
@@ -53,7 +64,7 @@ input {
   padding: 8px 16px;
 
   &:active, &:focus {
-    border-color: rgb(33, 186, 69);
+    border-color: colors.$vibrant;
     background: linear-gradient(0deg, transparent, hsl(134 69.9% 13.3%));
   }
 }
@@ -72,7 +83,7 @@ input {
     border: colors.$dark-highlight 2px solid;
 
     &:active, &:focus {
-      border-color: rgb(33, 186, 69);
+      border-color: colors.$vibrant;
       background: linear-gradient(0deg, transparent, hsl(134 69.9% 87.7%));
     }
   }

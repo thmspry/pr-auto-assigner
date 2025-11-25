@@ -1,7 +1,7 @@
 import './ListCard.scss'
 import React from "react";
 import type {List} from "../../../types/list.ts";
-import {PenLine} from "lucide-react";
+import {PenLine, Users} from "lucide-react";
 
 type ListCardProps = {
     list: List,
@@ -22,11 +22,15 @@ export const ListCard: React.FC<ListCardProps> = ({list, selectList}: ListCardPr
 
     return (
         <div className="card">
-            <div className="content" onClick={assignPeople}>
+            <div className="title" >
                 <h3>{list.name}</h3>
+                <i>{list.people.length} personnes</i>
             </div>
-            <button className="edit" onClick={onSelectList}><PenLine size={16}/></button>
+            <div className="people" onClick={assignPeople}>
+                {list.people.map((a) => <p className="person-preview">{a}</p>)}
+            </div>
+            <button onClick={assignPeople}><Users size={12}/>Assigner</button>
+            <button className="edit secondary" onClick={onSelectList}><PenLine size={12}/></button>
         </div>
-
     );
 };

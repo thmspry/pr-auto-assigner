@@ -1,6 +1,7 @@
 import {ListCard} from "./ListCard/ListCard.tsx";
 import type {StorageData} from "../../types/storage-data.ts";
 import type {List} from "../../types/list.ts";
+import {Plus} from "lucide-react";
 
 type HomeProps = {
     data: StorageData,
@@ -12,8 +13,8 @@ const Home = ({data, goToEditMode, goToCreateMode}: HomeProps) => {
     return (
         <>
             <header>
-                <h1>Pull Request Auto Assigner</h1>
-                <i></i>
+                <h1>PR Auto</h1>
+                <button onClick={goToCreateMode}><Plus size={14}/>Ajouter</button>
             </header>
 
             <main>
@@ -24,10 +25,6 @@ const Home = ({data, goToEditMode, goToCreateMode}: HomeProps) => {
                 </div>
 
             </main>
-
-            <footer>
-                <button onClick={goToCreateMode}>Créer une liste</button>
-            </footer>
         </>
     );
 };
