@@ -4,7 +4,7 @@
   display: flex;
   flex-flow: column;
   gap: 4px;
-  background: colors.$dark-2;
+  background: linear-gradient(0deg, colors.$dark-2 70%, colors.$dark-1);;
   border-radius: 16px;
   position: relative;
   padding: 10px;
@@ -12,8 +12,9 @@
   border: 2px solid colors.$border;
 
   &:hover {
-    background: colors.$dark-2;
+    background: linear-gradient(0deg, colors.$dark-2, hsl(134 69.9% 12%));
     border-color: colors.$vibrant;
+
     .edit {
       opacity: 1;
     }
@@ -54,6 +55,10 @@
 
     &:hover {
       background: linear-gradient(0deg, colors.$light-2, hsl(134 69.9% 87.7%));
+    }
+
+    .people .person-preview {
+      background: colors.$light-1;
     }
   }
 }

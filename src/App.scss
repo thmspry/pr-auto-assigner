@@ -17,10 +17,6 @@ h1 {
   margin: 0;
 }
 
-header, main, footer {
-  width: 100%;
-}
-
 header, footer {
   display: flex;
   align-items: center;
@@ -46,9 +42,7 @@ footer {
 }
 
 @media (prefers-color-scheme: light) {
-  header {
-    background: colors.$light-2;
-    box-shadow: none;
-    border-bottom: 1px solid colors.$light-3;
+  #root {
+    background: colors.$light-3;
   }
 }

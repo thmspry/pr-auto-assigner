@@ -75,8 +75,13 @@ input {
     background-color: colors.$light-3;
   }
 
-  button:hover {
-    background-color: hsl(134 69.9% 87.7%);
+  button.secondary {
+    color: colors.$light-font-1;
+
+    &:hover {
+      background-color: colors.$vibrant;
+      color: colors.$dark-font-1;
+    }
   }
 
   input {

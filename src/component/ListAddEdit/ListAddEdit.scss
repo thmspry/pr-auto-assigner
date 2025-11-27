@@ -29,6 +29,7 @@
     height: 100%;
     padding: 8px;
     border-radius: 8px;
+    width: fit-content;
 
     .field {
       display: flex;
@@ -73,9 +74,7 @@ header, main, footer {
 @media (prefers-color-scheme: light) {
   .add-edit {
     main {
-      .field {
-        background: colors.$light-2;
-      }
+      background: colors.$light-2;
     }
   }
 }
