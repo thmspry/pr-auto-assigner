@@ -132,7 +132,7 @@ const ListAddEdit = ({addList, editList, deleteList, list, existantList, switchM
             <footer>
                 {
                     list ? <>
-                            <button className="delete" onClick={deleteHehe}><Trash2 onClick={deleteHehe}/></button>
+                            <button className="delete" onClick={deleteHehe}><Trash2 onClick={deleteHehe} size={14}/></button>
                             <button className="main-action" onClick={onEditList} disabled={actionIsDisabled()}>
                                 Modifier la liste
                             </button>

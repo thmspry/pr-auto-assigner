@@ -54,6 +54,7 @@
   .card {
     background: linear-gradient(0deg, colors.$light-2 70%, colors.$light-1);
     box-shadow: 0 2px 2px hsla(0, 0%, 0%, 0.07), 0 4px 4px hsla(0, 0%, 0%, 0.15);
+    border: 2px solid colors.$light-font-2;
 
     &:hover {
       background: linear-gradient(0deg, colors.$light-2, hsl(134 69.9% 87.7%));
