@@ -3,7 +3,7 @@
 .card {
   display: flex;
   flex-flow: column;
-  gap: 4px;
+  gap: 8px;
   background: linear-gradient(0deg, colors.$dark-2 70%, colors.$dark-1);;
   border-radius: 16px;
   position: relative;
@@ -30,12 +30,14 @@
 
   .people {
     display: flex;
+    flex-flow: row wrap;
     gap: 4px;
 
     .person-preview {
       background: colors.$dark-1;
       border-radius: 1000px;
       padding: 4px 8px;
+      margin: 0;
     }
   }
 

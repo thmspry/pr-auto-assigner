@@ -8,6 +8,7 @@ type ListCardProps = {
     selectList: (list: List) => void
 }
 
+const MAX_PERSON_IN_CARD = 10;
 export const ListCard: React.FC<ListCardProps> = ({list, selectList}: ListCardProps) => {
 
     const onSelectList = () => {
@@ -20,6 +21,24 @@ export const ListCard: React.FC<ListCardProps> = ({list, selectList}: ListCardPr
         });
     }
 
+    const buildPerson = (text: string) => {
+        return <span className="person-preview">{text}</span>
+    }
+
+    const peopleToDisplay = () => {
+        return list.people
+            .sort((p1, p2) => p1.localeCompare(p2))
+            .slice(0, MAX_PERSON_IN_CARD)
+            .map((a) => buildPerson(a))
+    }
+
+    const plusPeople = () => {
+        const remaining = Math.max(list.people.length - list.people.slice(0, MAX_PERSON_IN_CARD).length, 0)
+        if (remaining != 0){
+            return buildPerson(`+${remaining}`);
+        }
+    }
+
     return (
         <div className="card">
             <div className="title" >
@@ -27,7 +46,8 @@ export const ListCard: React.FC<ListCardProps> = ({list, selectList}: ListCardPr
                 <i>{list.people.length} personnes</i>
             </div>
             <div className="people" onClick={assignPeople}>
-                {list.people.map((a) => <p className="person-preview">{a}</p>)}
+                { peopleToDisplay() }
+                { plusPeople() }
             </div>
             <button onClick={assignPeople}><Users size={12}/>Assigner</button>
             <button className="edit secondary" onClick={onSelectList}><PenLine size={12}/></button>
