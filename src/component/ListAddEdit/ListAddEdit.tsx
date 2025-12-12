@@ -4,6 +4,7 @@ import {useState} from "react";
 import {ArrowBigLeft, Plus, Trash2} from "lucide-react";
 import Person from "./Person/Person.tsx";
 import InfoTooltip from "./Info/InfoTooltip.tsx";
+import {t} from "../../utils/i18n.ts";
 
 type ListAddEditProps = {
     addList: (list: List) => void,
@@ -87,24 +88,24 @@ const ListAddEdit = ({addList, editList, deleteList, list, existantList, switchM
         <div className="add-edit">
             <header>
                 <button className="back-btn secondary" onClick={switchMode}><ArrowBigLeft/></button>
-                <h3>Créer une liste</h3>
+                <h3>{t('create_list')}</h3>
             </header>
 
             <main>
                 <div className="field">
-                    <label htmlFor={'name'}>Nom</label>
+                    <label htmlFor={'name'}>{t('name')}</label>
                     <input id={'name'} type={'text'} autoComplete={'off'} value={listName}
                            onChange={
                                (event) => setListName(event.target.value)
                            }
                     />
                     {
-                        listNameAlreadyExist() ? <p>Ce nom de liste existe déjà</p> : ''
+                        listNameAlreadyExist() ? <p>{t('list_name_error')}</p> : ''
                     }
                 </div>
 
                 <div className="field">
-                    <label htmlFor={'people'}>Personnes<InfoTooltip>Les identifiants exacts</InfoTooltip></label>
+                    <label htmlFor={'people'}>{t('people')}<InfoTooltip>{t('people_field_hint')}</InfoTooltip></label>
                     <div className="people-list">
                         {people.map((p) =>
                             <Person person={p} correspondToInput={correspondToInput(p)}
@@ -135,11 +136,11 @@ const ListAddEdit = ({addList, editList, deleteList, list, existantList, switchM
                     list ? <>
                             <button className="delete" onClick={deleteHehe}><Trash2 onClick={deleteHehe} size={14}/></button>
                             <button className="main-action" onClick={onEditList} disabled={actionIsDisabled()}>
-                                Modifier la liste
+                                {t('edit_list')}
                             </button>
                         </> :
                         <button className="main-action" onClick={createList} disabled={actionIsDisabled()}>
-                            Créer la liste
+                            {t('create_list_2')}
                         </button>
 
                 }

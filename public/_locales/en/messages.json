@@ -1,0 +1,32 @@
+{
+  "extension_name": {
+    "message": "PR Auto"
+  },
+  "add": {
+    "message": "Add"
+  },
+  "create_list": {
+    "message": "Create list"
+  },
+  "create_list_2": {
+    "message": "Create list"
+  },
+  "edit_list": {
+    "message": "Edit list"
+  },
+  "assign": {
+    "message": "Assign"
+  },
+  "list_name_error": {
+    "message": "This list name already exists"
+  },
+  "name": {
+    "message": "Name"
+  },
+  "people": {
+    "message": "People"
+  },
+  "people_field_hint": {
+    "message": "Les identifiants exacts"
+  }
+}

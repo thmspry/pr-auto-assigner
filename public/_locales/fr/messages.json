@@ -1,0 +1,35 @@
+{
+  "extension_name": {
+    "message": "PR Auto"
+  },
+  "add": {
+    "message": "Ajouter"
+  },
+  "create_list": {
+    "message": "Créer une liste"
+  },
+  "create_list_2": {
+    "message": "Créer la liste"
+  },
+  "edit_list": {
+    "message": "Modifier la liste"
+  },
+  "assign": {
+    "message": "Assigner"
+  },
+  "list_name_error": {
+    "message": "Ce nom de liste existe déjà"
+  },
+  "name": {
+    "message": "Nom"
+  },
+  "people": {
+    "message": "Personnes"
+  },
+  "people_lower": {
+    "message": "personnes"
+  },
+  "people_field_hint": {
+    "message": "Les identifiants exacts"
+  }
+}
