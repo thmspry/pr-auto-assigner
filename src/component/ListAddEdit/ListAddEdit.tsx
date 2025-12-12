@@ -3,6 +3,7 @@ import type {List} from "../../types/list.ts";
 import {useState} from "react";
 import {ArrowBigLeft, Plus, Trash2} from "lucide-react";
 import Person from "./Person/Person.tsx";
+import InfoTooltip from "./Info/InfoTooltip.tsx";
 
 type ListAddEditProps = {
     addList: (list: List) => void,
@@ -103,7 +104,7 @@ const ListAddEdit = ({addList, editList, deleteList, list, existantList, switchM
                 </div>
 
                 <div className="field">
-                    <label htmlFor={'people'}>Personnes</label>
+                    <label htmlFor={'people'}>Personnes<InfoTooltip>Les identifiants exacts</InfoTooltip></label>
                     <div className="people-list">
                         {people.map((p) =>
                             <Person person={p} correspondToInput={correspondToInput(p)}
