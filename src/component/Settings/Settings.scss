@@ -1,0 +1,76 @@
+@use '../../colors';
+
+.settings {
+  display: flex;
+  flex-flow: column;
+  gap: 8px;
+
+  header {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .back-btn {
+      position: absolute;
+      left: 0;
+      top: 50%;
+      border: none;
+
+      translate: 0 -50%;
+    }
+  }
+
+  main {
+    display: flex;
+    flex-flow: column;
+    gap: 16px;
+    background: var(--shade-2);
+    height: 100%;
+    padding: 8px 0;
+    border-radius: 8px;
+    width: 100%;
+    color: var(--font-main);
+
+    .setting {
+      display: flex;
+      justify-content: space-between;
+      margin: 0 8px;
+
+      .switch {
+        display: flex;
+        border-radius: 1000px;
+        background: var(--shade-3);
+        position: relative;
+
+        span {
+          width: 40px;
+          padding: 4px 8px;
+          background: transparent;
+          z-index: 2;
+          cursor: pointer;
+          text-align: center;
+
+          &.active {
+            color: white;
+          }
+
+          &.indicator {
+            background: linear-gradient(colors.$vibrant, colors.$vibrant-darker);
+            border-radius: 10000px;
+            z-index: 1;
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 66%;
+            transition: left 150ms cubic-bezier(.17,.67,.26,1.17);
+          }
+        }
+      }
+    }
+  }
+}
+
+header, main {
+  width: 100%;
+}

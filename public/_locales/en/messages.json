@@ -28,5 +28,17 @@
   },
   "people_field_hint": {
     "message": "Les identifiants exacts"
+  },
+  "settings": {
+    "message": "Settings"
+  },
+  "light": {
+    "message": "Light"
+  },
+  "auto": {
+    "message": "Auto"
+  },
+  "dark": {
+    "message": "Dark"
   }
 }

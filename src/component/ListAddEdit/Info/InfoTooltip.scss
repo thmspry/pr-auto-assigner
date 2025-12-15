@@ -14,7 +14,7 @@
     position: absolute;
     left: 18px;
     top: -10px;
-    background: colors.$dark-1;
+    background: var(--shade-3);
     padding: 8px;
     border-radius: 8px;
     font-size: 12px;
@@ -36,11 +36,5 @@
 
   to {
     opacity: 1;
-  }
-}
-
-@media (prefers-color-scheme: light) {
-  .wrapper .info-text {
-    background: colors.$light-1;
   }
 }

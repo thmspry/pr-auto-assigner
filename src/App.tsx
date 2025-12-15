@@ -5,72 +5,85 @@ import type {List} from "./types/list.ts";
 import {useState} from "react";
 import ListAddEdit from "./component/ListAddEdit/ListAddEdit.tsx";
 import Home from "./component/Home/Home.tsx";
+import Settings from "./component/Settings/Settings.tsx";
+import {useTheme} from "./hooks/useTheme.ts";
+
+type DisplayMode = 'home' | 'add-edit' | 'settings';
 
 const defaultData: StorageData = {
     lists: []
 };
 
 type DisplayModeProps = {
-    isEditMode: boolean,
+    mode: DisplayMode,
     data: StorageData,
-    switchMode: () => void,
+    setMode: (mode: DisplayMode) => void,
     createList: (list: List) => void,
     editList: (list: List) => void,
     deleteList: (listId: number) => void,
     existantList: List[],
 }
 
-function DisplayMode({isEditMode, data, switchMode, createList, editList, deleteList, existantList}: DisplayModeProps) {
+function DisplayMode({mode, data, setMode, createList, editList, deleteList, existantList}: DisplayModeProps) {
 
 
-    const [selectedList, setSelectedList] = useState<List| null>(null);
+    const [selectedList, setSelectedList] = useState<List | null>(null);
 
 
     const goToEditMode = (list: List) => {
         setSelectedList(list)
-        switchMode();
+        setMode('add-edit');
     }
 
     const goToCreateMode = () => {
         setSelectedList(null)
-        switchMode();
+        setMode('add-edit');
     }
 
-    if (isEditMode) {
-        return <ListAddEdit addList={createList} editList={editList} deleteList={deleteList} list={selectedList} existantList={existantList} switchMode={switchMode}/>;
+    const goToSettingsMode = () => {
+        setMode('settings');
     }
 
-    return <Home goToCreateMode={goToCreateMode} goToEditMode={goToEditMode} data={data}/>;
+    const goBackToHome = () => setMode('home');
+
+
+    switch (mode) {
+        case 'home':
+            return <Home goToCreateMode={goToCreateMode} goToEditMode={goToEditMode} goToSettingsMode={goToSettingsMode} data={data}/>;
+
+        case 'add-edit':
+            return <ListAddEdit addList={createList} editList={editList} deleteList={deleteList} list={selectedList}
+                                existantList={existantList} goBack={goBackToHome}/>;
+        case 'settings':
+            return <Settings goBack={goBackToHome}/>
+    }
 }
 
 function App() {
     const [data, setData] = useChromeStorage<StorageData>("personLists", defaultData);
-    const [isEditMode, setIsEditMode] = useState<boolean>(false);
-
-    const switchMode = () => {
-        setIsEditMode(!isEditMode);
-    };
+    const [mode, setMode] = useState<DisplayMode>('home');
+    useTheme();
 
     const createList = (list: List) => {
         setData({lists: [...data.lists, list]});
-        switchMode();
+        setMode('home');
     };
 
     const editList = (editList: List) => {
         const newLists: List[] = data.lists.filter((l: List) => l.id !== editList.id);
         setData({lists: [...newLists, editList]});
-        switchMode();
+        setMode('home');
     };
 
     const deleteList = (listId: number) => {
         const newLists: List[] = data.lists.filter((list: List) => list.id !== listId);
         setData({lists: newLists});
-        switchMode();
+        setMode('home');
     };
 
 
     return (
-        <DisplayMode isEditMode={isEditMode} data={data} switchMode={switchMode} createList={createList} editList={editList}
+        <DisplayMode mode={mode} data={data} setMode={setMode} createList={createList} editList={editList}
                      deleteList={deleteList} existantList={data.lists}/>
     );
 }

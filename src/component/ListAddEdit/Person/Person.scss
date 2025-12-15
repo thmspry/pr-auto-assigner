@@ -2,7 +2,7 @@
 
 
 .person {
-  $base-background: colors.$dark-1;
+  $base-background: var(--shade-3);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -84,50 +84,4 @@
     margin-left: 4px;
     height: fit-content;
   }
-}
-
-@media (prefers-color-scheme: light) {
-  .person {
-    $base-background: colors.$light-1;
-    background: $base-background;
-    border-bottom: 2px solid colors.$dark-highlight;
-
-    &.correspond-to-input {
-      animation: a infinite 4s;
-
-      @keyframes a {
-        0% {
-          background: $base-background;
-        }
-
-        10% {
-          background: hsl(134 69.9% 87.7%);
-        }
-
-        20% {
-          background: $base-background;
-        }
-
-        30% {
-          background: hsl(134 69.9% 87.7%);
-        }
-        40% {
-          background: $base-background;
-        }
-
-        50% {
-          background: hsl(134 69.9% 87.7%);
-        }
-
-        60% {
-          background: $base-background;
-        }
-
-        100% {
-          background: $base-background;
-        }
-      }
-    }
-  }
-
 }

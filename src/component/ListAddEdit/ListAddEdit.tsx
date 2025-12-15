@@ -12,10 +12,10 @@ type ListAddEditProps = {
     deleteList: (listId: number) => void,
     existantList: List[],
     list?: List | null,
-    switchMode: () => void,
+    goBack: () => void,
 };
 
-const ListAddEdit = ({addList, editList, deleteList, list, existantList, switchMode}: ListAddEditProps) => {
+const ListAddEdit = ({addList, editList, deleteList, list, existantList, goBack}: ListAddEditProps) => {
 
     const [listName, setListName] = useState<string>(list?.name ?? '');
     const [people, setPeople] = useState<string[]>(list?.people ?? [])
@@ -87,7 +87,7 @@ const ListAddEdit = ({addList, editList, deleteList, list, existantList, switchM
     return (
         <div className="add-edit">
             <header>
-                <button className="back-btn secondary" onClick={switchMode}><ArrowBigLeft/></button>
+                <button className="back-btn secondary" onClick={goBack}><ArrowBigLeft/></button>
                 <h3>{t('create_list')}</h3>
             </header>
 
