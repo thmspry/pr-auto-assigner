@@ -43,5 +43,20 @@
   },
   "dark": {
     "message": "Sombre"
+  },
+  "mode": {
+    "message": "Mode"
+  },
+  "import": {
+    "message": "Importer"
+  },
+  "import_config": {
+    "message": "Importer la configuration (JSON)"
+  },
+  "export": {
+    "message": "Exporter"
+  },
+  "export_config": {
+    "message": "Télécharger la configuration actuelle"
   }
 }

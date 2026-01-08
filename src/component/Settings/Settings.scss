@@ -25,7 +25,6 @@
     display: flex;
     flex-flow: column;
     gap: 16px;
-    background: var(--shade-2);
     height: 100%;
     padding: 8px 0;
     border-radius: 8px;
@@ -35,7 +34,10 @@
     .setting {
       display: flex;
       justify-content: space-between;
-      margin: 0 8px;
+      background: var(--shade-2);
+      flex-flow: row wrap;
+      padding: 8px;
+      gap: 8px;
 
       .switch {
         display: flex;
@@ -64,6 +66,28 @@
             left: 0;
             height: 66%;
             transition: left 150ms cubic-bezier(.17,.67,.26,1.17);
+          }
+        }
+      }
+
+      .import-export {
+        display: flex;
+        flex-flow: column;
+        width: 100%;
+        gap: 8px;
+
+        .import-export-card {
+          display: flex;
+          align-items: center;
+          padding: 8px;
+          border-radius: 8px;
+          background: var(--shade-3);
+          gap: 8px;
+
+          .text {
+            display: flex;
+            flex-flow: column;
+            width: 100%;
           }
         }
       }

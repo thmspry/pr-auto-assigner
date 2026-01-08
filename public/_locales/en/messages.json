@@ -40,5 +40,20 @@
   },
   "dark": {
     "message": "Dark"
+  },
+  "mode": {
+    "message": "Mode"
+  },
+  "import": {
+    "message": "Import"
+  },
+  "import_config": {
+    "message": "Import configuration (JSON)"
+  },
+  "export": {
+    "message": "Export"
+  },
+  "export_config": {
+    "message": "Download current configuration"
   }
 }
