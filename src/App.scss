@@ -32,6 +32,10 @@ header, footer {
 
 main {
   overflow-y: auto;
+  max-height: 400px;
+  scrollbar-color: var(--shade-1) var(--shade-3);
+  scrollbar-width: thin;
+  padding-right: 4px;
 
   .lists {
     display: flex;

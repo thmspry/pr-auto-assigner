@@ -22,9 +22,10 @@ type DisplayModeProps = {
     editList: (list: List) => void,
     deleteList: (listId: number) => void,
     existantList: List[],
+    setData: (data: StorageData) => void
 }
 
-function DisplayMode({mode, data, setMode, createList, editList, deleteList, existantList}: DisplayModeProps) {
+function DisplayMode({mode, data, setMode, createList, editList, deleteList, existantList, setData}: DisplayModeProps) {
     const [selectedList, setSelectedList] = useState<List | null>(null);
 
     const goToEditMode = (list: List) => {
@@ -52,7 +53,7 @@ function DisplayMode({mode, data, setMode, createList, editList, deleteList, exi
             return <ListAddEdit addList={createList} editList={editList} deleteList={deleteList} list={selectedList}
                                 existantList={existantList} goBack={goBackToHome}/>;
         case 'settings':
-            return <Settings goBack={goBackToHome} configuration={data}  />
+            return <Settings goBack={goBackToHome} configuration={data} setData={setData}  />
     }
 }
 
@@ -81,7 +82,7 @@ function App() {
 
     return (
         <DisplayMode mode={mode} data={data} setMode={setMode} createList={createList} editList={editList}
-                     deleteList={deleteList} existantList={data.lists}/>
+                     deleteList={deleteList} existantList={data.lists} setData={setData}/>
     );
 }
 

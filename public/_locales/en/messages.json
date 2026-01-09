@@ -48,7 +48,13 @@
     "message": "Import"
   },
   "import_config": {
-    "message": "Import configuration (JSON)"
+    "message": "Importation configuration (JSON)"
+  },
+  "import_error": {
+    "message": "Importation failed, the given JSON file is wrong formated."
+  },
+  "import_success": {
+    "message": "Successfully imported"
   },
   "export": {
     "message": "Export"

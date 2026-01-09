@@ -83,6 +83,7 @@
           border-radius: 8px;
           background: var(--shade-3);
           gap: 8px;
+          cursor: pointer;
 
           .text {
             display: flex;
@@ -97,4 +98,12 @@
 
 header, main {
   width: 100%;
+}
+
+.error {
+  color: red;
+}
+
+.success {
+  color: colors.$vibrant;
 }
