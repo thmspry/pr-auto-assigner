@@ -23,6 +23,11 @@
 
   .title {
     width: 100%;
+    cursor: grab;
+
+    .secondary {
+      color: var(--font-secondary);
+    }
 
     h3 {
       margin: 0;

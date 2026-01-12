@@ -44,6 +44,7 @@
         display: flex;
         border-radius: 1000px;
         background: var(--shade-3);
+        border: 1px solid var(--shade-3);
         position: relative;
 
         span {
@@ -53,6 +54,10 @@
           z-index: 2;
           cursor: pointer;
           text-align: center;
+
+          &:hover:not(.active) {
+            background: linear-gradient(transparent, var(--shade-2));
+          }
 
           &.active {
             color: white;

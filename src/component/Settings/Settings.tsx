@@ -74,16 +74,14 @@ const Settings = ({goBack, configuration, setData}: SettingsProps) => {
         setData(data);
     };
 
-    const getImportText = () => {
+    const importationResultText = () => {
         if(errorOnImport) {
-            return t('import_error');
+            return <p className="error">{t('import_error')}</p>;
         }
 
         if(configurationFileName) {
-            return `${t('import_success')} : ${configurationFileName}`;
+            return <p className="success">{`${t('import_success')} : ${configurationFileName}`}</p>;
         }
-
-        return '';
     }
 
     return (
@@ -110,6 +108,15 @@ const Settings = ({goBack, configuration, setData}: SettingsProps) => {
                     <label>{t('Configuration')}</label>
 
                     <div className="import-export">
+                        <div className="import-export-card" onClick={downloadConfiguration}>
+                            <FileUp/>
+                            <div className="text">
+                                <span>{t('export')}</span>
+                                <span className="secondary">{t('export_config')}</span>
+                            </div>
+                            <ChevronRight/>
+                        </div>
+
                         <div className="import-export-card" onClick={importConfiguration}>
                             <FileDown/>
                             <div className="text">
@@ -125,17 +132,7 @@ const Settings = ({goBack, configuration, setData}: SettingsProps) => {
                             />
                         </div>
 
-                        { errorOnImport || configurationFileName ? <p className={errorOnImport ? 'error' : configurationFileName ? 'success' : ''}>{getImportText()}</p> : '' }
-
-
-                        <div className="import-export-card" onClick={downloadConfiguration}>
-                            <FileUp/>
-                            <div className="text">
-                                <span>{t('export')}</span>
-                                <span className="secondary">{t('export_config')}</span>
-                            </div>
-                            <ChevronRight/>
-                        </div>
+                        { importationResultText() }
                     </div>
                 </div>
 

@@ -42,15 +42,15 @@ export const ListCard: React.FC<ListCardProps> = ({list, selectList}: ListCardPr
 
     return (
         <div className="card">
-            <div className="title" >
+            <div className="title">
                 <h3><GripVertical size={12}/>{list.name}</h3>
-                <i>{list.people.length} {t('people', true)}</i>
+                <i className="secondary">{list.people.length} {t('people', true)}</i>
             </div>
             <div className="people" onClick={assignPeople}>
                 { peopleToDisplay() }
                 { plusPeople() }
             </div>
-            <button onClick={assignPeople}><Users size={12}/>{t('assign')}</button>
+            <button onClick={assignPeople} ><Users size={12}/>{t('assign')}</button>
             <button className="edit secondary" onClick={onSelectList}><PenLine size={12}/></button>
         </div>
     );
