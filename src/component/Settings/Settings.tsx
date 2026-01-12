@@ -114,7 +114,7 @@ const Settings = ({goBack, configuration, setData}: SettingsProps) => {
                             <FileDown/>
                             <div className="text">
                                 <span>{t('import')}</span>
-                                <span>{t('import_config')}</span>
+                                <span className="secondary">{t('import_config')}</span>
                             </div>
                             <ChevronRight/>
                             <input
@@ -132,7 +132,7 @@ const Settings = ({goBack, configuration, setData}: SettingsProps) => {
                             <FileUp/>
                             <div className="text">
                                 <span>{t('export')}</span>
-                                <span>{t('export_config')}</span>
+                                <span className="secondary">{t('export_config')}</span>
                             </div>
                             <ChevronRight/>
                         </div>

@@ -38,6 +38,7 @@
       flex-flow: row wrap;
       padding: 8px;
       gap: 8px;
+      border-radius: 8px;
 
       .switch {
         display: flex;
@@ -84,11 +85,21 @@
           background: var(--shade-3);
           gap: 8px;
           cursor: pointer;
+          border: 1px solid var(--shade-3);
+          transition: 300ms background;
 
           .text {
             display: flex;
             flex-flow: column;
             width: 100%;
+
+            .secondary {
+              color: var(--font-secondary);
+            }
+          }
+
+          &:hover {
+            background: var(--shade-2);
           }
         }
       }

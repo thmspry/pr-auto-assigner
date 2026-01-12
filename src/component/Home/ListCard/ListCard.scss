@@ -10,7 +10,7 @@
   transition: 500ms;
   background: linear-gradient(0deg, var(--shade-2) 70%, var(--shade-3));
   box-shadow: 0 2px 2px hsla(0, 0%, 0%, 0.07), 0 4px 4px hsla(0, 0%, 0%, 0.15);
-  border: 2px solid var(--shade-2);
+  border: 1px solid var(--shade-2);
 
   &:hover {
     background: linear-gradient(0deg, var(--shade-2), var(--vibran-shade));
@@ -26,6 +26,8 @@
 
     h3 {
       margin: 0;
+      display: flex;
+      align-items: center;
     }
   }
 

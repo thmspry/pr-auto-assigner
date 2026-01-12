@@ -30,7 +30,7 @@ const Home = ({data, goToEditMode, goToCreateMode, goToSettingsMode, setLists}: 
                 <div className="lists">
                     {data.lists.map((list) => (
                         <Reorder.Item key={list.id} value={list} >
-                        <ListCard key={list.id} list={list} selectList={goToEditMode}/>
+                            <ListCard key={list.id} list={list} selectList={goToEditMode}/>
                         </Reorder.Item>
                     ))}
                 </div>
