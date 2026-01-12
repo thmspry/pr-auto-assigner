@@ -43,5 +43,26 @@
   },
   "dark": {
     "message": "Sombre"
+  },
+  "mode": {
+    "message": "Mode"
+  },
+  "import": {
+    "message": "Importer"
+  },
+  "import_config": {
+    "message": "Importer la configuration (JSON)"
+  },
+  "import_error": {
+    "message": "Importation impossible, le fichier JSON fournit n'est pas sous le bon format."
+  },
+  "import_success": {
+    "message": "Importé avec succès"
+  },
+  "export": {
+    "message": "Exporter"
+  },
+  "export_config": {
+    "message": "Télécharger la configuration actuelle"
   }
 }

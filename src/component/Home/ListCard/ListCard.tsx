@@ -1,7 +1,7 @@
 import './ListCard.scss'
 import React from "react";
 import type {List} from "../../../types/list.ts";
-import {PenLine, Users} from "lucide-react";
+import {GripVertical, PenLine, Users} from "lucide-react";
 import {t} from "../../../utils/i18n.ts";
 
 type ListCardProps = {
@@ -42,15 +42,15 @@ export const ListCard: React.FC<ListCardProps> = ({list, selectList}: ListCardPr
 
     return (
         <div className="card">
-            <div className="title" >
-                <h3>{list.name}</h3>
-                <i>{list.people.length} {t('people', true)}</i>
+            <div className="title">
+                <h3><GripVertical size={12}/>{list.name}</h3>
+                <i className="secondary">{list.people.length} {t('people', true)}</i>
             </div>
             <div className="people" onClick={assignPeople}>
                 { peopleToDisplay() }
                 { plusPeople() }
             </div>
-            <button onClick={assignPeople}><Users size={12}/>{t('assign')}</button>
+            <button onClick={assignPeople} ><Users size={12}/>{t('assign')}</button>
             <button className="edit secondary" onClick={onSelectList}><PenLine size={12}/></button>
         </div>
     );

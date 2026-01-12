@@ -6,6 +6,7 @@
   --shade-3: #{colors.$dark-3};
   --vibran-shade: #{colors.$vibrant-darkest};
   --font-main: #{colors.$dark-font-1};
+  --font-secondary: #{colors.$dark-font-2};
 
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   max-width: 365px;
@@ -18,6 +19,7 @@
   --shade-3: #{colors.$light-3};
   --vibran-shade: #{colors.$vibrant-lightest};
   --font-main: #{colors.$light-font-1};
+  --font-secondary: #{colors.$light-font-2};
 }
 
 /* 🌚 Dark forcé */
@@ -27,6 +29,7 @@
   --shade-3: #{colors.$dark-3};
   --vibran-shade: #{colors.$vibrant-darkest};
   --font-main: #{colors.$dark-font-1};
+  --font-secondary: #{colors.$dark-font-2};
 }
 
 /* 🌓 Auto = media query */
@@ -37,6 +40,7 @@
     --shade-3: #{colors.$light-3};
     --vibran-shade: #{colors.$vibrant-lightest};
     --font-main: #{colors.$light-font-1};
+    --font-secondary: #{colors.$light-font-2};
   }
 }
 

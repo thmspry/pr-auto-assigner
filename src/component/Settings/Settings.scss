@@ -25,7 +25,6 @@
     display: flex;
     flex-flow: column;
     gap: 16px;
-    background: var(--shade-2);
     height: 100%;
     padding: 8px 0;
     border-radius: 8px;
@@ -35,12 +34,17 @@
     .setting {
       display: flex;
       justify-content: space-between;
-      margin: 0 8px;
+      background: var(--shade-2);
+      flex-flow: row wrap;
+      padding: 8px;
+      gap: 8px;
+      border-radius: 8px;
 
       .switch {
         display: flex;
         border-radius: 1000px;
         background: var(--shade-3);
+        border: 1px solid var(--shade-3);
         position: relative;
 
         span {
@@ -50,6 +54,10 @@
           z-index: 2;
           cursor: pointer;
           text-align: center;
+
+          &:hover:not(.active) {
+            background: linear-gradient(transparent, var(--shade-2));
+          }
 
           &.active {
             color: white;
@@ -67,10 +75,51 @@
           }
         }
       }
+
+      .import-export {
+        display: flex;
+        flex-flow: column;
+        width: 100%;
+        gap: 8px;
+
+        .import-export-card {
+          display: flex;
+          align-items: center;
+          padding: 8px;
+          border-radius: 8px;
+          background: var(--shade-3);
+          gap: 8px;
+          cursor: pointer;
+          border: 1px solid var(--shade-3);
+          transition: 300ms background;
+
+          .text {
+            display: flex;
+            flex-flow: column;
+            width: 100%;
+
+            .secondary {
+              color: var(--font-secondary);
+            }
+          }
+
+          &:hover {
+            background: var(--shade-2);
+          }
+        }
+      }
     }
   }
 }
 
 header, main {
   width: 100%;
+}
+
+.error {
+  color: red;
+}
+
+.success {
+  color: colors.$vibrant;
 }
