@@ -7,7 +7,7 @@ Tu es développeur et tu crées 15 PR par jours ?
 Tu en as marre d'assigner sans cesse les mêmes personnes à chaque PR ?  
 Cette extension est faite pour toi !
 
-Ce projet est une extension Chrome/Firefox qui permet d'assigner automatiquement des gens à une pull request Gitea, un simple clic.  
+Ce projet est une extension Chrome/Firefox qui permet d'assigner automatiquement des gens à une pull request Gitea, en un simple clic.  
 Elle permet aussi de gérer différentes listes de personnes.
 
 ## Limitations
