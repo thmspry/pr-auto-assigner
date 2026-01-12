@@ -20,12 +20,13 @@ type DisplayModeProps = {
     setMode: (mode: DisplayMode) => void,
     createList: (list: List) => void,
     editList: (list: List) => void,
+    setLists: (lists: List[]) => void,
     deleteList: (listId: number) => void,
     existantList: List[],
     setData: (data: StorageData) => void
 }
 
-function DisplayMode({mode, data, setMode, createList, editList, deleteList, existantList, setData}: DisplayModeProps) {
+function DisplayMode({mode, data, setMode, createList, editList, deleteList, existantList, setData, setLists}: DisplayModeProps) {
     const [selectedList, setSelectedList] = useState<List | null>(null);
 
     const goToEditMode = (list: List) => {
@@ -47,7 +48,7 @@ function DisplayMode({mode, data, setMode, createList, editList, deleteList, exi
 
     switch (mode) {
         case 'home':
-            return <Home goToCreateMode={goToCreateMode} goToEditMode={goToEditMode} goToSettingsMode={goToSettingsMode} data={data}/>;
+            return <Home goToCreateMode={goToCreateMode} goToEditMode={goToEditMode} goToSettingsMode={goToSettingsMode} setLists={setLists} data={data}/>;
 
         case 'add-edit':
             return <ListAddEdit addList={createList} editList={editList} deleteList={deleteList} list={selectedList}
@@ -73,6 +74,11 @@ function App() {
         setMode('home');
     };
 
+    const setNewLists = (lists: List[]) => {
+        setData({lists: lists});
+        setMode('home');
+    };
+
     const deleteList = (listId: number) => {
         const newLists: List[] = data.lists.filter((list: List) => list.id !== listId);
         setData({lists: newLists});
@@ -82,7 +88,7 @@ function App() {
 
     return (
         <DisplayMode mode={mode} data={data} setMode={setMode} createList={createList} editList={editList}
-                     deleteList={deleteList} existantList={data.lists} setData={setData}/>
+                     deleteList={deleteList} existantList={data.lists} setData={setData} setLists={setNewLists}/>
     );
 }
 
