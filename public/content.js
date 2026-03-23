@@ -1,7 +1,20 @@
+function findAssigneeButton() {
+    // Cas où la PR est déjà créée
+    const assigneesButtonSelector = 'div.issue-content > div.issue-content-right.ui.segment > .issue-sidebar-combo';
+    let dropdownSections = document.querySelectorAll(assigneesButtonSelector);
+
+    if(dropdownSections.length === 0) {
+        // Cas où la PR est en cours de création
+        const assigneesButtonSelector = 'div.issue-content-right.ui.segment > div:nth-child(9) > div.ui.dropdown.full-width';
+        return document.querySelector(assigneesButtonSelector);
+    }
+    let dropdownAssigneeSection = [...dropdownSections].find((button) => button.innerHTML.includes('assignee'));
+    return dropdownAssigneeSection.querySelector('.dropdown');
+}
+
 function assignPeople(people, sendResponse) {
     // Ouvre la liste des "Assignees ⚙️"
-    let assigneesButtonSelector = '.issue-content > .issue-content-right.ui.segment > div:nth-child(9) > div.ui.dropdown';
-    const assigneesButton = document.querySelector(assigneesButtonSelector);
+    const assigneesButton = findAssigneeButton();
     assigneesButton.click();
 
     // Coche toutes les personnes
