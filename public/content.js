@@ -1,3 +1,5 @@
+const assignedList = [];
+
 function findAssigneeButton() {
     // Cas où la PR est déjà créée
     const assigneesButtonSelector = 'div.issue-content > div.issue-content-right.ui.segment > .issue-sidebar-combo';
@@ -10,21 +12,6 @@ function findAssigneeButton() {
     }
     let dropdownAssigneeSection = [...dropdownSections].find((button) => button.innerHTML.includes('assignee'));
     return dropdownAssigneeSection.querySelector('.dropdown');
-}
-
-function assignPeople(people, sendResponse) {
-    // Ouvre la liste des "Assignees ⚙️"
-    const assigneesButton = findAssigneeButton();
-    assigneesButton.click();
-
-    // Coche toutes les personnes
-    const allItems = assigneesButton.querySelectorAll('.scrolling .item .gt-ellipsis')
-    people.forEach(p => assignPerson(p, allItems));
-
-    // Ferme la liste des "Assignees ⚙️"
-    assigneesButton.click();
-
-    sendResponse({success: true});
 }
 
 /**
@@ -41,9 +28,53 @@ function assignPerson(person, allItems) {
     });
 }
 
+function notifyAssignation(listName) {
+    if(assignedList.includes(listName)) {
+        snackbar(`La liste ${listName} a été désassignée`);
+        const index = assignedList.indexOf(5);
+        if (index > -1) {
+            assignedList.splice(index, 1);
+        }
+    } else {
+        snackbar(`La liste ${listName} a été assignée`);
+        assignedList.push(listName);
+    }
+}
+
+function assignPeople({people, listName}, sendResponse) {
+    // Ouvre la liste des "Assignees ⚙️"
+    const assigneesButton = findAssigneeButton();
+    if(!assigneesButton) {
+        snackbar("J'ai pas trouvé la section Assignees, dsl", true);
+    }
+    assigneesButton.click();
+
+    // Coche toutes les personnes
+    const allItems = assigneesButton.querySelectorAll('.scrolling .item .gt-ellipsis')
+    people.forEach(p => assignPerson(p, allItems));
+    notifyAssignation(listName);
+
+    // Ferme la liste des "Assignees ⚙️"
+    assigneesButton.click();
+
+    sendResponse({success: true});
+}
+
+function isGitea() {
+    const metadataKeywords = document.querySelector('meta[name="keywords"]').content;
+    return metadataKeywords.includes('gitea');
+}
+
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
     if (msg.action === "assignPeople") {
-        assignPeople(msg.people, sendResponse);
+        if(!isGitea()) {
+            snackbar("C'est pas Gitea ça, connait pas", true);
+        }
+        const style = document.createElement('style');
+        style.innerHTML = css;
+        document.head.appendChild(style);
+
+        assignPeople(msg, sendResponse);
     }
 });
 

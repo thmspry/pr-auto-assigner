@@ -18,7 +18,7 @@ export const ListCard: React.FC<ListCardProps> = ({list, selectList}: ListCardPr
 
     const assignPeople = () => {
         chrome.tabs.query({active: true, currentWindow: true}, (tabs) => {
-            chrome.tabs.sendMessage(tabs[0].id!, {action: "assignPeople", people: list.people});
+            chrome.tabs.sendMessage(tabs[0].id!, {action: "assignPeople", people: list.people, listName: list.name});
         });
     }
 
