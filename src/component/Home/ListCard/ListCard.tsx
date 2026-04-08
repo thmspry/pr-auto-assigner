@@ -3,6 +3,7 @@ import React from "react";
 import type {List} from "../../../types/list.ts";
 import {GripVertical, PenLine, Users} from "lucide-react";
 import {t} from "../../../utils/i18n.ts";
+import {useAnimation} from "../../../hooks/useAnimation.ts";
 
 type ListCardProps = {
     list: List,
@@ -11,6 +12,7 @@ type ListCardProps = {
 
 const MAX_PERSON_IN_CARD = 10;
 export const ListCard: React.FC<ListCardProps> = ({list, selectList}: ListCardProps) => {
+    const {animation} = useAnimation();
 
     const onSelectList = () => {
         selectList(list)
@@ -18,7 +20,7 @@ export const ListCard: React.FC<ListCardProps> = ({list, selectList}: ListCardPr
 
     const assignPeople = () => {
         chrome.tabs.query({active: true, currentWindow: true}, (tabs) => {
-            chrome.tabs.sendMessage(tabs[0].id!, {action: "assignPeople", people: list.people, listName: list.name});
+            chrome.tabs.sendMessage(tabs[0].id!, {action: "assignPeople", people: list.people, listName: list.name, animation: animation});
         });
     }
 

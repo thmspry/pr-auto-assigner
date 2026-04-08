@@ -61,5 +61,14 @@
   },
   "export_config": {
     "message": "Download current configuration"
+  },
+  "animations": {
+    "message": "Animations"
+  },
+  "no": {
+    "message": "No"
+  },
+  "yes": {
+    "message": "Yes"
   }
 }

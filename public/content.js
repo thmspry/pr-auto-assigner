@@ -41,11 +41,14 @@ function notifyAssignation(listName) {
     }
 }
 
-function assignPeople({people, listName}, sendResponse) {
+function assignPeople({people, listName, animation}, sendResponse) {
     // Ouvre la liste des "Assignees ⚙️"
     const assigneesButton = findAssigneeButton();
     if(!assigneesButton) {
         snackbar("J'ai pas trouvé la section Assignees, dsl", true);
+    }
+    if(animation) {
+        confetti(assigneesButton);
     }
     assigneesButton.click();
 

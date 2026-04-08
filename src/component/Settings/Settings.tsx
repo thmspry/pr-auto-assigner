@@ -5,6 +5,7 @@ import {type Theme, useTheme} from "../../hooks/useTheme.ts";
 import type {StorageData} from "../../types/storage-data.ts";
 import {type RefObject, useRef, useState} from "react";
 import {StorageDataSchema} from "./StorageDataValidator.ts";
+import {useAnimation} from "../../hooks/useAnimation.ts";
 
 type SettingsProps = {
     goBack: () => void,
@@ -15,29 +16,43 @@ type SettingsProps = {
 const Settings = ({goBack, configuration, setData}: SettingsProps) => {
 
     const {theme, setTheme} = useTheme();
+    const {animation, setAnimation} = useAnimation();
+
     const fileInputRef: RefObject<HTMLInputElement | null> = useRef(null);
     const [errorOnImport, setErrorOnImport] = useState<boolean>(false);
     const [configurationFileName, setConfigurationFileName] = useState<string>('');
 
     const themes: Theme[] = ['light', 'auto', 'dark'];
 
+    const animationChoices: {
+        label: string,
+        value: boolean
+    }[] = [{
+        label: 'no',
+        value: false,
+    },
+        {
+            label: 'yes',
+            value: true,
+        }]
+
     const downloadConfiguration = () => {
         const a = document.createElement("a")
         a.href = URL.createObjectURL(
-            new Blob([JSON.stringify(configuration)], {type:"application/json"})
+            new Blob([JSON.stringify(configuration)], {type: "application/json"})
         )
         a.download = "pr-auto-assigner-configuration.json"
         a.click();
     }
 
     const importConfiguration = () => {
-        if(!fileInputRef) {
+        if (!fileInputRef) {
             return;
         }
         fileInputRef?.current?.click();
     }
 
-    const getIndicatorLeftPosition = () => {
+    const getIndicatorLeftPositionTheme = () => {
         const spanWidth: number = 55;
 
         const getPx = (left: number) => `${left}px`;
@@ -51,8 +66,24 @@ const Settings = ({goBack, configuration, setData}: SettingsProps) => {
         }
     };
 
+    const getIndicatorLeftPositionAnimation = () => {
+        const spanWidth: number = 55;
+
+        const getPx = (left: number) => `${left}px`;
+        switch (animation) {
+            case false:
+                return getPx(0 * spanWidth);
+            case true:
+                return getPx(1 * spanWidth);
+        }
+    };
+
     const switchItemClass = (value: string) => {
         return value === theme ? 'active' : '';
+    }
+
+    const switchItemClassAnimation = (value: boolean) => {
+        return value === animation ? 'active' : '';
     }
 
     // @ts-ignore
@@ -75,11 +106,11 @@ const Settings = ({goBack, configuration, setData}: SettingsProps) => {
     };
 
     const importationResultText = () => {
-        if(errorOnImport) {
+        if (errorOnImport) {
             return <p className="error">{t('import_error')}</p>;
         }
 
-        if(configurationFileName) {
+        if (configurationFileName) {
             return <p className="success">{`${t('import_success')} : ${configurationFileName}`}</p>;
         }
     }
@@ -100,7 +131,19 @@ const Settings = ({goBack, configuration, setData}: SettingsProps) => {
                             themes.map((theme) => <span className={switchItemClass(theme)}
                                                         onClick={() => setTheme(theme)}>{t(theme)}</span>)
                         }
-                        <span className="indicator" style={{left: getIndicatorLeftPosition()}}></span>
+                        <span className="indicator" style={{left: getIndicatorLeftPositionTheme()}}></span>
+                    </div>
+                </div>
+
+                <div className="setting">
+                    <label>{t('animations')}</label>
+
+                    <div className="switch">
+                        {
+                            animationChoices.map((choice) => <span className={switchItemClassAnimation(choice.value)}
+                                                                   onClick={() => setAnimation(choice.value)}>{t(choice.label)}</span>)
+                        }
+                        <span className="indicator" style={{left: getIndicatorLeftPositionAnimation()}}></span>
                     </div>
                 </div>
 
@@ -127,12 +170,12 @@ const Settings = ({goBack, configuration, setData}: SettingsProps) => {
                             <input
                                 type="file"
                                 ref={fileInputRef}
-                                style={{ display: "none" }}
+                                style={{display: "none"}}
                                 onChange={handleFileChange}
                             />
                         </div>
 
-                        { importationResultText() }
+                        {importationResultText()}
                     </div>
                 </div>
 
