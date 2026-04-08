@@ -5,7 +5,7 @@ import {type Theme, useTheme} from "../../hooks/useTheme.ts";
 import type {StorageData} from "../../types/storage-data.ts";
 import {type RefObject, useRef, useState} from "react";
 import {StorageDataSchema} from "./StorageDataValidator.ts";
-import {useAnimation} from "../../hooks/useAnimation.ts";
+import {type Animation, useAnimation} from "../../hooks/useAnimation.ts";
 
 type SettingsProps = {
     goBack: () => void,
@@ -23,18 +23,7 @@ const Settings = ({goBack, configuration, setData}: SettingsProps) => {
     const [configurationFileName, setConfigurationFileName] = useState<string>('');
 
     const themes: Theme[] = ['light', 'auto', 'dark'];
-
-    const animationChoices: {
-        label: string,
-        value: boolean
-    }[] = [{
-        label: 'no',
-        value: false,
-    },
-        {
-            label: 'yes',
-            value: true,
-        }]
+    const animations: Animation[] = ['none', 'confetti', "fire", 'magic'];
 
     const downloadConfiguration = () => {
         const a = document.createElement("a")
@@ -70,11 +59,16 @@ const Settings = ({goBack, configuration, setData}: SettingsProps) => {
         const spanWidth: number = 55;
 
         const getPx = (left: number) => `${left}px`;
+        console.log('animation', animation)
         switch (animation) {
-            case false:
+            case 'none':
                 return getPx(0 * spanWidth);
-            case true:
+            case 'confetti':
                 return getPx(1 * spanWidth);
+            case 'fire':
+                return getPx(2 * spanWidth);
+            case 'magic':
+                return getPx(3 * spanWidth);
         }
     };
 
@@ -82,7 +76,7 @@ const Settings = ({goBack, configuration, setData}: SettingsProps) => {
         return value === theme ? 'active' : '';
     }
 
-    const switchItemClassAnimation = (value: boolean) => {
+    const switchItemClassAnimation = (value: string) => {
         return value === animation ? 'active' : '';
     }
 
@@ -140,8 +134,8 @@ const Settings = ({goBack, configuration, setData}: SettingsProps) => {
 
                     <div className="switch">
                         {
-                            animationChoices.map((choice) => <span className={switchItemClassAnimation(choice.value)}
-                                                                   onClick={() => setAnimation(choice.value)}>{t(choice.label)}</span>)
+                            animations.map((choice) => <span className={switchItemClassAnimation(choice)}
+                                                                   onClick={() => setAnimation(choice)}>{t(choice)}</span>)
                         }
                         <span className="indicator" style={{left: getIndicatorLeftPositionAnimation()}}></span>
                     </div>

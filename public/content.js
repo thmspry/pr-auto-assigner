@@ -5,7 +5,7 @@ function findAssigneeButton() {
     const assigneesButtonSelector = 'div.issue-content > div.issue-content-right.ui.segment > .issue-sidebar-combo';
     let dropdownSections = document.querySelectorAll(assigneesButtonSelector);
 
-    if(dropdownSections.length === 0) {
+    if (dropdownSections.length === 0) {
         // Cas où la PR est en cours de création
         const assigneesButtonSelector = 'div.issue-content-right.ui.segment > div:nth-child(9) > div.ui.dropdown.full-width';
         return document.querySelector(assigneesButtonSelector);
@@ -22,14 +22,14 @@ function findAssigneeButton() {
 function assignPerson(person, allItems) {
     allItems.forEach(item => {
         const name = item.innerText;
-        if(name.includes(person)) {
+        if (name.includes(person)) {
             item.click();
         }
     });
 }
 
 function notifyAssignation(listName) {
-    if(assignedList.includes(listName)) {
+    if (assignedList.includes(listName)) {
         snackbar(`La liste ${listName} a été désassignée`);
         const index = assignedList.indexOf(5);
         if (index > -1) {
@@ -41,15 +41,29 @@ function notifyAssignation(listName) {
     }
 }
 
+function switchAnimation(animation, assigneesButton) {
+    switch (animation) {
+        case 'none':
+            break;
+        case 'confetti':
+            confetti(assigneesButton);
+            break;
+        case 'fire':
+            fire(assigneesButton);
+            break;
+        case 'magic':
+            magicWand(assigneesButton);
+            break;
+    }
+}
+
 function assignPeople({people, listName, animation}, sendResponse) {
     // Ouvre la liste des "Assignees ⚙️"
     const assigneesButton = findAssigneeButton();
-    if(!assigneesButton) {
+    if (!assigneesButton) {
         snackbar("J'ai pas trouvé la section Assignees, dsl", true);
     }
-    if(animation) {
-        confetti(assigneesButton);
-    }
+    switchAnimation(animation, assigneesButton);
     assigneesButton.click();
 
     // Coche toutes les personnes
@@ -70,7 +84,7 @@ function isGitea() {
 
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
     if (msg.action === "assignPeople") {
-        if(!isGitea()) {
+        if (!isGitea()) {
             snackbar("C'est pas Gitea ça, connait pas", true);
         }
         const style = document.createElement('style');

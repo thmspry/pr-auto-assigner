@@ -9,7 +9,7 @@ body {
     padding: 16px;
     border-radius: 8px;
     right: 32px;
-    top: 228px;
+    bottom: 228px;
     color: white;
     animation: forwards snackbar-reveal 6s;
     font-weight: bold;
@@ -67,6 +67,54 @@ body {
   }
   100% {
     transform: translate(var(--x), var(--y)) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+.fire-particle {
+  position: absolute;
+  bottom: 0;
+  width: 6px;
+  height: 12px;
+  background: radial-gradient(circle, yellow 0%, orange 60%, red 100%);
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0.8;
+  animation: fire-rise 1.2s ease-out forwards;
+}
+
+@keyframes fire-rise {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.9;
+  }
+  100% {
+    transform: translate(var(--x), -120px) scale(0.5);
+    opacity: 0;
+  }
+}
+
+.sparkle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: pink;
+  border-radius: 50%;
+  pointer-events: none;
+  box-shadow: 0 0 8px 2px pink;
+  animation: sparkle-pop 0.8s ease-out forwards;
+}
+
+@keyframes sparkle-pop {
+  0% {
+    transform: scale(0) rotate(0deg);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.5) rotate(180deg);
+  }
+  100% {
+    transform: scale(0) rotate(360deg);
     opacity: 0;
   }
 }

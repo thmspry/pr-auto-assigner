@@ -73,5 +73,17 @@
   },
   "yes": {
     "message": "Oui"
+  },
+  "none": {
+    "message": "Aucune"
+  },
+  "confetti": {
+    "message": "Confetti"
+  },
+  "fire": {
+    "message": "Feu"
+  },
+  "magic": {
+    "message": "Magie"
   }
 }

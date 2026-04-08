@@ -54,3 +54,68 @@ function confetti(target) {
         setTimeout(() => confetti.remove(), 1000);
     }
 }
+
+function fire(target) {
+    const rect = target.getBoundingClientRect();
+
+    for (let i = 0; i < 40; i++) {
+        const fire = document.createElement('div');
+        fire.classList.add('fire-particle');
+
+        // position aléatoire sur le bas
+        const x = Math.random() * rect.width;
+        fire.style.left = `${x}px`;
+
+        // mouvement horizontal léger
+        const drift = (Math.random() - 0.5) * 40;
+        fire.style.setProperty('--x', `${drift}px`);
+
+        fire.style.animationDuration = `${0.8 + Math.random()}s`;
+
+        target.appendChild(fire);
+
+        setTimeout(() => fire.remove(), 1200);
+    }
+}
+
+function magicWand(target) {
+    const rect = target.getBoundingClientRect();
+
+    for (let i = 0; i < 50; i++) {
+        const sparkle = document.createElement('div');
+        sparkle.classList.add('sparkle');
+
+        // autour de la div (bord + extérieur)
+        const side = Math.floor(Math.random() * 4);
+
+        let x, y;
+
+        switch (side) {
+            case 0: // top
+                x = Math.random() * rect.width;
+                y = -5;
+                break;
+            case 1: // right
+                x = rect.width + 5;
+                y = Math.random() * rect.height;
+                break;
+            case 2: // bottom
+                x = Math.random() * rect.width;
+                y = rect.height + 5;
+                break;
+            case 3: // left
+                x = -5;
+                y = Math.random() * rect.height;
+                break;
+        }
+
+        sparkle.style.left = `${x}px`;
+        sparkle.style.top = `${y}px`;
+
+        sparkle.style.animationDelay = `${Math.random() * 0.3}s`;
+
+        target.appendChild(sparkle);
+
+        setTimeout(() => sparkle.remove(), 800);
+    }
+}
