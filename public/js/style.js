@@ -9,7 +9,7 @@ body {
     padding: 16px;
     border-radius: 8px;
     right: 32px;
-    bottom: 228px;
+    bottom: 40px;
     color: white;
     animation: forwards snackbar-reveal 6s;
     font-weight: bold;
@@ -41,7 +41,7 @@ body {
   }
   
   100% {
-    transform: translateX(0) translateY(100%);
+    transform: translateX(0) translateY(-100%);
     opacity: 0;
   }
 }

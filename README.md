@@ -21,8 +21,7 @@ Peut-être qu'un jour je me taperais une deter et ce sera disponible partout.
 
 ### Build
 - Clone le projet où tu veux sur ton PC.
-- Lance `npm install` à la racine du projet.
-- Et ensuite lance `npm run build`.
+- Lance `installer.bat` sur Windows ou `installer.sh` sur Linux/MacOS
 
 ### 💿 Importation dans Chrome
 - Ouvre Chrome et entre cet URL dans la barre de recherche : `chrome://extensions/`. Ça va ouvrir le gestionnaire d'extension.
@@ -54,8 +53,8 @@ The extension works only with Gitea and only on Google Chrome.
 
 ### Build
 - Clone the project to your machine.
-- Run `npm install` at the project root.
-- Then run `npm run build`.
+#### On Windows (auto installation)
+- Launch `installer.bat` for Windows or `installer.sh` for Linux/MacOS
 
 ### 💿 Importing into Chrome
 - Open Chrome and navigate to `chrome://extensions/`.

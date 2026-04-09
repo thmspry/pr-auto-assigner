@@ -31,7 +31,7 @@ function assignPerson(person, allItems) {
 function notifyAssignation(listName) {
     if (assignedList.includes(listName)) {
         snackbar(`La liste ${listName} a été désassignée`);
-        const index = assignedList.indexOf(5);
+        const index = assignedList.indexOf(listName);
         if (index > -1) {
             assignedList.splice(index, 1);
         }

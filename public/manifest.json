@@ -9,7 +9,7 @@
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["style.js", "snackbar.js", "animation.js", "content.js"]
+      "js": ["js/style.js", "js/snackbar.js", "js/animation.js", "js/content.js"]
     }
   ],
   "icons": {
