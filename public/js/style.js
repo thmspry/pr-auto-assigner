@@ -1,6 +1,6 @@
 const css = `
 body {
-    overflow: hidden;
+    overflow-x: hidden;
 }
 
 #pr-auto-assigner-snackbar {
