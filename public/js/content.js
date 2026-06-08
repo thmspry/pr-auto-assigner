@@ -67,7 +67,7 @@ function assignPeople({people, listName, animation}, sendResponse) {
     assigneesButton.click();
 
     // Coche toutes les personnes
-    const allItems = assigneesButton.querySelectorAll('.scrolling .item .gt-ellipsis')
+    const allItems = assigneesButton.querySelectorAll('.scrolling .item');
     people.forEach(p => assignPerson(p, allItems));
     notifyAssignation(listName);
 
